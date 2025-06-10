@@ -46,58 +46,58 @@ export const voiceDetails = [
 export const podcastData = [
   {
     id: 1,
-    title: "The Joe Rogan Experience",
-    description: "A long form, in-depth conversation",
+    title: "Atomic Habit",
+    description: "An atomic habit is a little habit that is part of a larger system",
     imgURL:
-      "https://lovely-flamingo-139.convex.cloud/api/storage/3106b884-548d-4ba0-a179-785901f69806",
+      "https://i.ibb.co/chxq85sj/Atomic-habits-PDFDrive-0000.jpg",
   },
   {
     id: 2,
-    title: "The Futur",
+    title: "The Future",
     description: "This is how the news should sound",
     imgURL:
-      "https://lovely-flamingo-139.convex.cloud/api/storage/16fbf9bd-d800-42bc-ac95-d5a586447bf6",
+      "https://i.ibb.co/PZXxt3q1/40566a-cbadc6b349ff4dfc8956b663596d69de-mv2.png",
   },
   {
     id: 3,
     title: "Waveform",
     description: "Join Michelle Obama in conversation",
     imgURL:
-      "https://lovely-flamingo-139.convex.cloud/api/storage/60f0c1d9-f2ac-4a96-9178-f01d78fa3733",
+      "https://i.ibb.co/JRfTR6SJ/Waveform-Podcast.jpg",
   },
   {
     id: 4,
     title: "The Tech Talks Daily Podcast",
     description: "This is how the news should sound",
     imgURL:
-      "https://lovely-flamingo-139.convex.cloud/api/storage/5ba7ed1b-88b4-4c32-8d71-270f1c502445",
+      "https://i.ibb.co/chJJh2gn/228374-300x300.jpg",
   },
   {
     id: 5,
     title: "GaryVee Audio Experience",
     description: "A long form, in-depth conversation",
     imgURL:
-      "https://lovely-flamingo-139.convex.cloud/api/storage/ca7cb1a6-4919-4b2c-a73e-279a79ac6d23",
+      "https://i.ibb.co/VW5VTTDc/The-Gary-Vee-Audio-Experience-1678242136.jpg",
   },
   {
     id: 6,
     title: "Syntax ",
     description: "Join Michelle Obama in conversation",
     imgURL:
-      "https://lovely-flamingo-139.convex.cloud/api/storage/b8ea40c7-aafb-401a-9129-73c515a73ab5",
+      "https://i.ibb.co/84xzvPH5/syntax-fm.jpg",
   },
   {
     id: 7,
-    title: "IMPAULSIVE",
+    title: "2 Cents Podcast",
     description: "A long form, in-depth conversation",
     imgURL:
-      "https://lovely-flamingo-139.convex.cloud/api/storage/8a55d662-fe3f-4bcf-b78b-3b2f3d3def5c",
+      "https://i.ibb.co/xKnZ7cN2/1200x1200bf-60.jpg",
   },
   {
     id: 8,
     title: "Ted Tech",
     description: "This is how the news should sound",
     imgURL:
-      "https://lovely-flamingo-139.convex.cloud/api/storage/221ee4bd-435f-42c3-8e98-4a001e0d806e",
+      "https://i.ibb.co/m5wLbXHS/ab6765630000ba8a1eef8dcabec3dca77ace07c8.jpg",
   },
 ];
