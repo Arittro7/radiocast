@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import { sidebarLinks } from "@/constants";
 import { cn } from "@/lib/utils";
@@ -9,7 +9,7 @@ import React from "react";
 
 const LeftSidebar = () => {
   const pathname = usePathname();
-  const router = useRouter()
+  const router = useRouter();
   return (
     <section className="left-sidebar">
       <nav className="flex flex-col gap-6">
@@ -25,7 +25,7 @@ const LeftSidebar = () => {
         {sidebarLinks.map(({ route, label, imgURL}) => {
           const isActive = pathname === route || pathname.startsWith(`${route}/`)
 
-          return <Link href={route} key={label} className={cn("flex gap-3 items-center py-4 max-lg:px-4 justify-start")}>
+          return <Link href={route} key={label} className={cn("flex gap-3 items-center py-4 max-lg:px-4 justify-start", { 'bg-[#c8cbc710] border-r-4 border-orange-500' : isActive})}>
             <Image src={imgURL} alt={label} width={24} height={24}/>
             <p>{label}</p>
           </Link>
