@@ -120,3 +120,18 @@
     @apply bg-background text-foreground;
   }
 }
+
+@layer utilities {
+  .my-custom-input {
+    @apply h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm placeholder:text-muted-foreground;
+  }
+
+  /* Add any other custom utility classes here */
+  .page-title {
+    @apply text-3xl font-bold tracking-tight text-primary;
+  }
+
+  .left-sidebar {
+    @apply sticky left-0 top-0 flex w-fit flex-col  justify-between  border-none pt-8 max-md:hidden lg:w-[270px] lg:pl-8;
+  }
+}
