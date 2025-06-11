@@ -32,9 +32,8 @@ import { Loader } from "lucide-react";
 import { Id } from "@/convex/_generated/dataModel";
 
 const formSchema = z.object({
-  username: z.string().min(2, {
-    message: "Username must be at least 2 characters.",
-  }),
+  podcastTitle: z.string().min(2),
+  podcastDescription: z.string().min(2),
 });
 
 const voiceCategories = ['alloy', 'shimmer', 'nova', 'echo', 'fable', 'onyx']
@@ -59,7 +58,8 @@ const CreatePodcast = () => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      username: "",
+      podcastTitle: "",
+      podcastDescription: "",
     },
   });
 
@@ -86,7 +86,7 @@ const CreatePodcast = () => {
               name="podcastTitle"
               render={({ field }) => (
                 <FormItem className="flex flex-col gap-2.5">
-                  <FormLabel className="text-gray-400">Username</FormLabel>
+                  <FormLabel className="text-gray-400">Title</FormLabel>
                   <FormControl>
                     <Input
                       className="input-class focus-visible:ring-orange-200"
@@ -142,7 +142,15 @@ const CreatePodcast = () => {
             />
           </div>
           <div className="flex flex-col pt-10">
-            <GeneratePodcast/>
+            <GeneratePodcast 
+            setAudioStorageId={setAudioStorageId}
+            setAudio={setAudioUrl}
+            voiceType={voiceType}
+            audio={audioUrl}
+            voicePrompt={voicePrompt}
+            setVoicePrompt={setVoicePrompt}
+            setAudioDuration={setAudioDuration}
+            />
 
             <GenerateThumbnail/>
 
