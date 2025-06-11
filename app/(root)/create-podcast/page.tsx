@@ -24,7 +24,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { cn } from "@/lib/utils";
-import { useState } from "react";
+import { useDebugValue, useState } from "react";
 
 const formSchema = z.object({
   username: z.string().min(2, {
@@ -83,11 +83,11 @@ const CreatePodcast = () => {
 
             <div className="flex flex-col gap-2.5">
               <Label className="text-gray-400">Select AI Voice</Label>
-              <Select>
+              <Select onValueChange={(value) => setVoiceType(value)}>
                 <SelectTrigger className={cn('w-full border-none bg-black text-gray-400')}>
                   <SelectValue placeholder="Select AI Voice" className="placeholder:text-gray-400"/>
                 </SelectTrigger>
-                <SelectContent className="border-none bg-gray-300 font-semibold text-white focus:ring-orange-500">
+                <SelectContent className="border-none bg-gray-800 font-semibold text-white focus:ring-orange-500">
                   {voiceCategories.map
                     ((category) => (
                       <SelectItem key={category} value={category} className="capitalize focus:bg-orange-500">
@@ -99,7 +99,7 @@ const CreatePodcast = () => {
                 {voiceType && (
                   <audio
                   src={`/${voiceType}.mp3`} autoPlay 
-                  className=""
+                  className="hidden"
                   />
                 )}
               </Select>
