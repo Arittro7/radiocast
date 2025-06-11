@@ -2,7 +2,7 @@
 const authConfig = {
   providers: [
     {
-      domain: 'https://enhanced-maggot-5.clerk.accounts.dev ',
+      domain: "https://enhanced-maggot-5.clerk.accounts.dev",
       applicationID: "convex",
     },
   ]
