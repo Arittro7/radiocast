@@ -25,6 +25,11 @@ import {
 } from "@/components/ui/select";
 import { cn } from "@/lib/utils";
 import { useDebugValue, useState } from "react";
+import { Textarea } from "@/components/ui/textarea";
+import GeneratePodcast from "@/components/GeneratePodcast";
+import GenerateThumbnail from "@/components/GenerateThumbnail";
+import { Loader } from "lucide-react";
+import { Id } from "@/convex/_generated/dataModel";
 
 const formSchema = z.object({
   username: z.string().min(2, {
@@ -35,7 +40,19 @@ const formSchema = z.object({
 const voiceCategories = ['alloy', 'shimmer', 'nova', 'echo', 'fable', 'onyx']
 
 const CreatePodcast = () => {
+  const [isSubmitting, setisSubmitting] = useState(false)
+  
+  const [imagePrompt, setImagePrompt] = useState('')
+  const [imageStorageId, setImageStorageId] = useState<Id<"_storage"> | null>(null)
+  
+  const [audioUrl, setAudioUrl] = useState('')
+  const [audioStorageId, setAudioStorageId] = useState<Id<"_storage"> | null>(null)
+  const [audioDuration, setAudioDuration] = useState(0)
+  
+  
   const [voiceType, setVoiceType] = useState<string | null> (null)
+  const [voicePrompt, setVoicePrompt] = useState('')
+
 
 
   // 1. Define your form.
@@ -63,6 +80,7 @@ const CreatePodcast = () => {
           className="mt-12 flex w-full flex-col"
         >
           <div className="flex flex-col gap-[30px] border-b border-gray-600 mb-2 pb-10">
+            {/* Username 👇 */}
             <FormField
               control={form.control}
               name="podcastTitle"
@@ -80,7 +98,7 @@ const CreatePodcast = () => {
                 </FormItem>
               )}
             />
-
+            {/* Voice selection 👇 */}
             <div className="flex flex-col gap-2.5">
               <Label className="text-gray-400">Select AI Voice</Label>
               <Select onValueChange={(value) => setVoiceType(value)}>
@@ -104,9 +122,44 @@ const CreatePodcast = () => {
                 )}
               </Select>
             </div>
+            {/* Description 👇 */}
+            <FormField
+              control={form.control}
+              name="podcastDescription"
+              render={({ field }) => (
+                <FormItem className="flex flex-col gap-2.5">
+                  <FormLabel className="text-gray-400">Description</FormLabel>
+                  <FormControl>
+                    <Textarea
+                      className="input-class focus-visible:ring-orange-200"
+                      placeholder="Write a short podcast description"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage className="text-gray-400" />
+                </FormItem>
+              )}
+            />
           </div>
+          <div className="flex flex-col pt-10">
+            <GeneratePodcast/>
 
-          <Button type="submit">Submit</Button>
+            <GenerateThumbnail/>
+
+            <div className="mt-10 w-full">
+              <Button type="submit" className="w-full bg-orange-600 text-white py-4 font-bold transition-all
+               duration-500 hover:bg-black cursor-pointer">
+                {isSubmitting ? (
+                  <>
+                  Submitting
+                  <Loader size={20} className="animate-spin "></Loader>
+                  </>
+                ) : (
+                  'Submit & Publish Podcast'
+                )}
+               </Button>
+            </div>
+          </div>
         </form>
       </Form>
     </section>
