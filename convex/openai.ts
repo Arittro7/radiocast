@@ -11,7 +11,7 @@ const openai = new OpenAI({
 export const generateAudioAction = action({
   args: { input: v.string(), voice: v.string() },
   handler: async (_, {voice, input}) => {
-    const mp3 = await open.audio.speech.create({
+    const mp3 = await openai.audio.speech.create({
       model: "gpt-4o-mini-tts",
       voice : voice as SpeechCreateParams['voice'],
       input,

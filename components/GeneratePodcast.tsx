@@ -7,8 +7,7 @@ import { Loader } from "lucide-react";
 import { useAction, useMutation } from "convex/react";
 import { api } from "@/convex/_generated/api";
 import {v4 as uuidv4} from 'uuid';
-import { generateUploadUrl } from "./files";
-
+import { toast } from "sonner"
 import {useUploadFiles} from '@xixixao/uploadstuff/react'
 
 
@@ -17,18 +16,19 @@ const useGeneratePodcast = ({
 }: GeneratePodcastProps) =>{
   const [isGenerating, setIsGenerating] = useState(false)
 
-  const generateUploadUrl = useMutation(api.files.generateUploadUrl)
+  const generateUploadUrl = useMutation(api.files.generateUploadUrl);
   const {startUpload} = useUploadFiles(generateUploadUrl)
 
   const getPodcastAudio = useAction(api.openai.generateAudioAction)
 
+  const getAudioUrl = useMutation(api.podcasts.getUrl)
+
   const generatePodcast = async () => {
     setIsGenerating(true)
-
     setAudio('')
 
     if(!voicePrompt){
-      // note: toast error message
+      toast("Please Provide a voiceType to generate a Podcast")
       return setIsGenerating(false)
     }
 
@@ -47,9 +47,13 @@ const useGeneratePodcast = ({
       setAudioStorageId(storageId)
 
       const audioUrl = await getAudioUrl({ storageId})
+      setAudio(audioUrl!)
+      setIsGenerating(false)
+      toast("Podcast generated successfully")
+
     } catch (error) {
       console.log('Error generating podcast', error)
-      // note: show error message
+      toast("Error creating a podcast")
       setIsGenerating(false)
     }
 
@@ -76,7 +80,7 @@ const GeneratePodcast = (props: GeneratePodcastProps) => {
          />
       </div>
       <div className="mt-5 w-full max-w-[200px]">
-        <Button type="submit" className="bg-orange-600 text-white py-4 font-bold hover:bg-black cursor-pointer">
+        <Button type="submit" className="bg-orange-600 text-white py-4 font-bold hover:bg-black cursor-pointer" onClick={generatePodcast}>
                 {isGenerating ? (
                   <>
                   Generating
