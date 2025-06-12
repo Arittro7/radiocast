@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
-  FormDescription,
+  // FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -24,7 +24,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { cn } from "@/lib/utils";
-import { useDebugValue, useState } from "react";
+import { useState } from "react";
 import { Textarea } from "@/components/ui/textarea";
 import GeneratePodcast from "@/components/GeneratePodcast";
 import GenerateThumbnail from "@/components/GenerateThumbnail";
@@ -39,18 +39,19 @@ const formSchema = z.object({
 const voiceCategories = ['alloy', 'shimmer', 'nova', 'echo', 'fable', 'onyx']
 
 const CreatePodcast = () => {
-  const [isSubmitting, setisSubmitting] = useState(false)
-  
-  const [imagePrompt, setImagePrompt] = useState('')
+  const [imagePrompt, setImagePrompt] = useState('');
   const [imageStorageId, setImageStorageId] = useState<Id<"_storage"> | null>(null)
+  const [imageUrl, setImageUrl] = useState('');
   
-  const [audioUrl, setAudioUrl] = useState('')
+  const [audioUrl, setAudioUrl] = useState('');
   const [audioStorageId, setAudioStorageId] = useState<Id<"_storage"> | null>(null)
-  const [audioDuration, setAudioDuration] = useState(0)
+  const [audioDuration, setAudioDuration] = useState(0);
   
+  const [voiceType, setVoiceType] = useState<string | null>(null);
+  const [voicePrompt, setVoicePrompt] = useState('');
   
-  const [voiceType, setVoiceType] = useState<string | null> (null)
-  const [voicePrompt, setVoicePrompt] = useState('')
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
 
 
 
@@ -152,7 +153,13 @@ const CreatePodcast = () => {
             setAudioDuration={setAudioDuration}
             />
 
-            <GenerateThumbnail/>
+            <GenerateThumbnail
+              setImage={setImageUrl}
+              setImageStorageId={setImageStorageId}
+              image={imageUrl}
+              imagePrompt={imagePrompt}
+              setImagePrompt={setImagePrompt}
+            />
 
             <div className="mt-10 w-full">
               <Button type="submit" className="w-full bg-orange-600 text-white py-4 font-bold transition-all
