@@ -29,4 +29,5 @@ export default defineSchema({
     clerkId: v.string(),
     name: v.string(),
   })
+  
 })

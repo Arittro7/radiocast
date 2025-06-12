@@ -15,6 +15,11 @@ const nextConfig: NextConfig = {
         hostname: 'ibb.co',
         port: '',
         pathname: '/**',
+      },
+
+      {
+        protocol: 'https',
+        hostname: 'handsome-raccoon-677.convex.cloud'
       }
     ]
   }
