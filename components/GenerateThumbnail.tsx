@@ -7,6 +7,10 @@ import { GenerateThumbnailProps } from "@/Types";
 import { Loader } from "lucide-react";
 import { Input } from "./ui/input";
 import Image from "next/image";
+import { toast } from "sonner";
+import { useMutation } from "convex/react";
+import { useUploadFiles } from "@xixixao/uploadstuff/react";
+import { api } from "@/convex/_generated/api";
 
 const GenerateThumbnail = ({
   setImage,
@@ -19,7 +23,34 @@ const GenerateThumbnail = ({
   const [isImageLoading, setIsImageLoading] = useState(false);
   const imageRef = useRef<HTMLInputElement>(null);
 
+  const generateUploadUrl = useMutation(api.files.generateUploadUrl);
+  const { startUpload } = useUploadFiles(generateUploadUrl)
+  const getImageUrl = useMutation(api.podcasts.getUrl);
+
+  const handleImage = async (blob: Blob, fileName: string) =>{
+    setIsImageLoading(true)
+    setImage('')
+
+    try {
+      const file = new File([blob], fileName, { type: 'image/png' });
+
+      const uploaded = await startUpload([file]);
+      const storageId = (uploaded[0].response as any).storageId;
+
+      setImageStorageId(storageId);
+
+      const imageUrl = await getImageUrl({ storageId });
+      setImage(imageUrl!);
+      setIsImageLoading(false);
+
+      toast("Thumbnail generated successfully")
+    } catch (error) {
+      console.log(error);
+      toast("Error generating thumbnail")
+    }
+  }
   const generateImage = async () => {};
+  const uploadImage = async (e: React.ChangeEvent<HTMLInputElement>) =>{}
 
   return (
     <>
@@ -73,23 +104,42 @@ const GenerateThumbnail = ({
           </div>
         </div>
       ) : (
-        <div className="h-10 border-2 text-white" onClick={() => imageRef?.current?.click()}>
+        <div className="h-22 border-2 text-white" onClick={() => imageRef?.current?.click()}>
           <Input 
             type="file"
             className="hidden"
             ref={imageRef}
+            onChange={(e) => uploadImage(e)}
           />
           {!isImageLoading ? (
             <div className="flex justify-center w-full">
               <Image src="/icons/upload-image.svg" alt="Upload" width={40} height={40} />
             </div>
           ) : (
-            <div>
-              <Loader size={20} className="animate-spin"/>
+            <div className=""> 
+              Uploading
+              <Loader size={20} className="animate-spin ml-2"/>
             </div>
           )}
+          <div className="flex flex-col items-center gap-1 text-sm">
+            <h2 className="text-orange-500">Click to upload</h2>
+            <p>SVG, PNG, JPG or GIF (max. 1080x1080px)</p>
+          </div>
         </div>
       )}
+      {
+        image && (
+          <div className="flex justify-center w-full">
+            <Image
+              src={image}
+              width={200}
+              height={200}
+              className="mt-5"
+              alt="thumbnail"
+            />
+          </div>
+        )
+      }
     </>
   );
 };
