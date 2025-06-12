@@ -31,6 +31,9 @@ import GenerateThumbnail from "@/components/GenerateThumbnail";
 import { Loader } from "lucide-react";
 import { Id } from "@/convex/_generated/dataModel";
 import { toast } from "sonner";
+import { useMutation } from "convex/react";
+import { api } from "@/convex/_generated/api";
+import { useRouter } from "next/navigation";
 
 const formSchema = z.object({
   podcastTitle: z.string().min(2),
@@ -40,6 +43,7 @@ const formSchema = z.object({
 const voiceCategories = ['alloy', 'shimmer', 'nova', 'echo', 'fable', 'onyx']
 
 const CreatePodcast = () => {
+  const router = useRouter()
   const [imagePrompt, setImagePrompt] = useState('');
   const [imageStorageId, setImageStorageId] = useState<Id<"_storage"> | null>(null)
   const [imageUrl, setImageUrl] = useState('');
@@ -52,6 +56,8 @@ const CreatePodcast = () => {
   const [voicePrompt, setVoicePrompt] = useState('');
   
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const createPodcast = useMutation(api.podcasts.createPodcast)
 
  // 1. Define your form.
   const form = useForm<z.infer<typeof formSchema>>({
@@ -71,28 +77,28 @@ const CreatePodcast = () => {
         throw new Error('Please generate audio and image')
       }
 
-  //     const podcast = await createPodcast({
-  //       podcastTitle: data.podcastTitle,
-  //       podcastDescription: data.podcastDescription,
-  //       audioUrl,
-  //       imageUrl,
-  //       voiceType,
-  //       imagePrompt,
-  //       voicePrompt,
-  //       views: 0,
-  //       audioDuration,
-  //       audioStorageId: audioStorageId!,
-  //       imageStorageId: imageStorageId!,
-  //     })
-  //     toast('Podcast created')
-  //     setIsSubmitting(false);
-  //     router.push('/')
-  //   } catch (error) {
-  //     console.log(error);
-  //     toast('Error')
-  //     setIsSubmitting(false);
-  //   }
-  // }
+      const podcast = await createPodcast({
+        podcastTitle: data.podcastTitle,
+        podcastDescription: data.podcastDescription,
+        audioUrl,
+        imageUrl,
+        voiceType,
+        imagePrompt,
+        voicePrompt,
+        views: 0,
+        audioDuration,
+        audioStorageId: audioStorageId!,
+        imageStorageId: imageStorageId!,
+      })
+      toast('Podcast created')
+      setIsSubmitting(false);
+      router.push('/')
+    } catch (error) {
+      console.log(error);
+      toast('Error')
+      setIsSubmitting(false);
+    }
+  }
 
   return (
     <section className="mt-10 flex flex-col">
