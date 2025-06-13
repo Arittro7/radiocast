@@ -1,25 +1,43 @@
-import Image from 'next/image'
-import React from 'react'
+import { PodcastCardProps } from "@/Types";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
+import React from "react";
 
-const PodcastCard = ({imgUrl,title,description,podcastId}: 
-  {imgUrl: string, title:string,description: string, podcastId:number}) => {
+const PodcastCard = ({
+  imgUrl,
+  title,
+  description,
+  podcastId,
+}: PodcastCardProps) => {
+  const router = useRouter();
+
+  const handleViews = () => {
+    // increase views
+
+    router.push(`/podcasts/${podcastId}`, {
+      scroll: true,
+    });
+  };
+
   return (
-    <div className='cursor-pointer'>
-      <figure className='flex flex-col gap-2'>
-        <Image 
-        src={imgUrl}
-        width={174}
-        height={174}
-        alt={title}
-        className='aspect-square h-fit w-full rounded-xl 2xl:size-[200px]'
+    <div className="cursor-pointer" onClick={handleViews}>
+      <figure className="flex flex-col gap-2">
+        <Image
+          src={imgUrl}
+          width={174}
+          height={174}
+          alt={title}
+          className=" h-fit w-full rounded-xl 2xl:size-[200px]"
         />
-        <div>
-          <h1 className='text-xl truncate font-bold'>{title}</h1>
-          <h2 className='text-lg truncate font-normal capitalize text-gray-400'>{description}</h2>
+        <div className="flex flex-col">
+          <h1 className="truncate font-bold text-white-1">{title}</h1>
+          <h2 className=" truncate font-normal capitalize ">
+            {description}
+          </h2>
         </div>
       </figure>
     </div>
-  )
-}
+  );
+};
 
-export default PodcastCard
+export default PodcastCard;
