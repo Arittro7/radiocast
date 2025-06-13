@@ -6,9 +6,9 @@ const Header = ({ headerTitle, titleClassName}: { headerTitle?: string; titleCla
   return (
     <header className="flex items-center justify-between">
       {headerTitle ? (
-        <h1 className={cn('text-18 font-bold text-white-1', titleClassName)}>{headerTitle}</h1>
+        <h1 className={cn(' font-bold', titleClassName)}>{headerTitle}</h1>
       ): <div />}
-      <Link href="/discover" className="text-16 font-semibold text-orange-1">
+      <Link href="/discover" className=" font-semibold text-orange-400">
         See all
       </Link>
     </header>
