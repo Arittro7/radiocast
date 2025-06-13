@@ -20,6 +20,11 @@ const nextConfig: NextConfig = {
       {
         protocol: 'https',
         hostname: 'handsome-raccoon-677.convex.cloud'
+      },
+
+      {
+        protocol: 'https',
+        hostname: 'img.clerk.com'
       }
     ]
   }

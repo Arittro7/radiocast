@@ -53,7 +53,7 @@ const PodcastDetails = ({ params: { podcastId } }: { params: { podcastId: Id<'po
         </div>
         <div className='flex flex-col gap-4'>
           <h1 className='font-bold'>Thumbnail Prompt</h1>
-          <p className="text-16 font-medium text-white-2">{podcast?.imagePrompt}</p>
+          <p className="text-16 font-medium text-white">{podcast?.imagePrompt}</p>
         </div>
       </div>
       <section className="mt-8 flex flex-col gap-5">
