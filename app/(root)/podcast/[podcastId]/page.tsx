@@ -15,6 +15,7 @@ const PodcastDetails = ({ params: { podcastId } }: { params: { podcastId: Id<'po
 
   const podcast = useQuery(api.podcasts.getPodcastById, { podcastId })
 
+  
   const similarPodcasts = useQuery(api.podcasts.getPodcastByVoiceType, { podcastId })
 
   const isOwner = user?.id === podcast?.authorId;
