@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useCallback } from "react";
 import { EmblaCarouselType } from "embla-carousel";
 import { DotButton, useDotButton } from "./EmblaCarouselDotButton";
@@ -7,6 +9,7 @@ import { CarouselProps } from "@/Types";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import LoaderSpinner from "./LoaderSpinner";
+import { Doc } from "@/convex/_generated/dataModel"; // Import the Doc type
 
 const EmblaCarousel = ({ fansLikeDetail }: CarouselProps) => {
   const router = useRouter();
@@ -32,7 +35,7 @@ const EmblaCarousel = ({ fansLikeDetail }: CarouselProps) => {
 
   const slides =
     fansLikeDetail &&
-    fansLikeDetail?.filter((item: any) => item.totalPodcasts > 0);
+    fansLikeDetail?.filter((item: Doc<"users">) => item.totalPodcasts > 0);
 
   if (!slides) return <LoaderSpinner />;
 

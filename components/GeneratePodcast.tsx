@@ -14,12 +14,11 @@ const useGeneratePodcast = ({
   setAudio,
   voiceType,
   voicePrompt,
-  setAudioStorageId, // This is no longer needed with UploadThing but we keep it for prop compatibility
+  // setAudioStorageId, // This line has been removed
 }: GeneratePodcastProps) => {
   const [isGenerating, setIsGenerating] = useState(false);
 
-  // Use the UploadThing hook for file uploads
-  const { startUpload } = useUploadThing("audioUploader", { // Assuming you have an "audioUploader" route
+  const { startUpload } = useUploadThing("audioUploader", {
     onClientUploadComplete: (res) => {
       const fileUrl = res?.[0]?.url;
       if (fileUrl) {
@@ -39,7 +38,7 @@ const useGeneratePodcast = ({
 
   const generatePodcast = async () => {
     setIsGenerating(true);
-    setAudio(""); // Clear previous audio
+    setAudio("");
 
     if (!voicePrompt) {
       toast.error("Please provide a voice prompt to generate a podcast.");
@@ -48,7 +47,6 @@ const useGeneratePodcast = ({
     }
 
     try {
-      // 1. Generate audio from OpenAI
       const response = await getPodcastAudio({
         voice: voiceType,
         input: voicePrompt,
@@ -62,7 +60,6 @@ const useGeneratePodcast = ({
       const fileName = `podcast-${uuidv4()}.mp3`;
       const file = new File([blob], fileName, { type: "audio/mpeg" });
 
-      // 2. Start the upload process with UploadThing
       await startUpload([file]);
 
     } catch (error) {
@@ -71,18 +68,14 @@ const useGeneratePodcast = ({
       setIsGenerating(false);
     }
   };
-
   return {
     isGenerating,
     generatePodcast,
   };
 };
 
-
-// Main component that renders the UI
 const GeneratePodcast = (props: GeneratePodcastProps) => {
   const { isGenerating, generatePodcast } = useGeneratePodcast(props);
-
   return (
     <div>
       <div className="flex flex-col gap-2.5">
