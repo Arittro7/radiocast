@@ -8,9 +8,7 @@ import Image from "next/image";
 import { Loader } from "lucide-react";
 import { toast } from "sonner";
 import { GenerateThumbnailProps } from "@/Types";
-// import { useAction } from "convex/react";
-// import { api } from "@/convex/_generated/api";
-import { useUploadThing } from "@/lib/uploadthing"; // Import the hook from our new file
+import { useUploadThing } from "@/lib/uploadthing";
 
 const GenerateThumbnail = ({
   setImage,
