@@ -17,15 +17,15 @@ const LeftSidebar = () => {
   const { audio } = useAudio();
 
   return (
-    <section className={cn("left_sidebar h-[calc(100vh-5px)]", {
+    <section className={cn("hidden md:flex md:flex-col left_sidebar w-[230px] h-[calc(100vh-5px)]", {
       'h-[calc(100vh-140px)]': audio?.audioUrl
     })}>
-      <nav className="flex flex-col gap-6">
+      <nav className="flex flex-col gap-6 mt-4">
         <Link
           href="/"
           className="flex cursor-pointer items-center gap-1 pb-10 max-lg:justify-center"
         >
-          <Image src="/icons/logo.svg" alt="logo" width={23} height={27} />
+          <Image src="/icons/logo.svg" alt="logo" width={30} height={30} />
           <h1 className="text-2xl font-extrabold max-lg:hidden">RadioCast</h1>
         </Link>
         {sidebarLinks.map(({ route, label, imgURL }) => {

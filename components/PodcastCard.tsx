@@ -31,9 +31,7 @@ const PodcastCard = ({
         />
         <div className="flex flex-col">
           <h1 className="truncate font-bold text-white-1">{title}</h1>
-          <h2 className=" truncate font-normal capitalize ">
-            {description}
-          </h2>
+          <h2 className=" truncate font-normal capitalize ">{description}</h2>
         </div>
       </figure>
     </div>

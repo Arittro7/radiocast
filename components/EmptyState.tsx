@@ -1,4 +1,4 @@
-import { EmptyStateProps } from "@/types";
+import { EmptyStateProps } from "@/Types";
 import Image from "next/image";
 import React from "react";
 import { Button } from "./ui/button";
@@ -19,9 +19,7 @@ const EmptyState = ({
         alt="empty state"
       />
       <div className="flex justify-center w-full max-w-[254px] flex-col gap-3">
-        <h1 className=" text-center font-medium text-white">
-          {title}
-        </h1>
+        <h1 className=" text-center font-medium text-white">{title}</h1>
         {search && (
           <p className="text-center font-medium text-white">
             Try adjusting your search to find what you are looking for
@@ -36,9 +34,7 @@ const EmptyState = ({
                 height={20}
                 alt="discover"
               />
-              <h1 className="font-extrabold">
-                {buttonText}
-              </h1>
+              <h1 className="font-extrabold">{buttonText}</h1>
             </Link>
           </Button>
         )}

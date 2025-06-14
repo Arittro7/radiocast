@@ -5,12 +5,11 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 import { api } from "@/convex/_generated/api";
-import { useAudio } from '@/providers/AudioProvider';
+import { useAudio } from "@/providers/AudioProvider";
 import { toast } from "sonner";
 import LoaderSpinner from "./LoaderSpinner";
 import { Button } from "./ui/button";
 import { PodcastDetailPlayerProps } from "@/Types";
-
 
 const PodcastDetailPlayer = ({
   audioUrl,
